@@ -1,0 +1,59 @@
+.pelicula-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  .pelicula-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: white;
+    background-image: linear-gradient(to bottom, #06055a, #03145e);
+  }
+  
+  .pelicula-table th,
+  .pelicula-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .pelicula-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .filter-section {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .pdf-button,
+  .clear-button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .clear-button {
+    background-color: #f44336;
+    margin-left: 10px;
+  }
+  
+  .pdf-button:hover,
+  .clear-button:hover {
+    opacity: 0.8;
+  }
+  

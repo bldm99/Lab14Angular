@@ -1,0 +1,92 @@
+<style>
+
+    body{
+        background: white;
+    }
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgb(228, 216, 240);
+    }
+    .card input{
+        padding: 8px 12px;
+        background: blue;
+        color: white;
+        border: none;
+    }
+    .file-info{
+        background: rgb(173, 165, 180);
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+
+
+<body>
+    <div class="card">
+        <h1>Carga de archivos</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="files" multiple />
+            <input type="submit" value="Cargar" />
+        </form>
+    </div>
+
+
+
+
+    <div class="file-info" id="file-info"></div>
+
+    <script>
+        // Script para mostrar los detalles del archivo cargado
+        const form = document.querySelector('form');
+        const fileInfoDiv = document.querySelector('#file-info');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+
+
+            if (response.ok) {
+                const fileInfos = await response.json();
+                fileInfoDiv.innerHTML = '';
+
+                fileInfos.forEach(fileInfo => {
+                    const imageElement = document.createElement('img');
+                    imageElement.src = `/${fileInfo.originalname}`;
+                    imageElement.alt = 'Imagen cargada';
+                    imageElement.style.width = '20%';
+
+                    const filenameElement = document.createElement('p');
+                    filenameElement.textContent = `Nombre: ${fileInfo.filename}`;
+
+                    const originalnameElement = document.createElement('p');
+                    originalnameElement.textContent = `Nombre original: ${fileInfo.originalname}`;
+
+                    const sizeElement = document.createElement('p');
+                    sizeElement.textContent = `Tamaño: ${fileInfo.size} bytes`;
+
+                    const mimetypeElement = document.createElement('p');
+                    mimetypeElement.textContent = `Tipo MIME: ${fileInfo.mimetype}`;
+
+                    fileInfoDiv.appendChild(filenameElement);
+                    fileInfoDiv.appendChild(originalnameElement);
+                    fileInfoDiv.appendChild(sizeElement);
+                    fileInfoDiv.appendChild(mimetypeElement);
+                    fileInfoDiv.appendChild(imageElement);
+                });
+            } else {
+                fileInfoDiv.innerHTML = 'Error al cargar el archivo.';
+            }
+        });
+    </script>
+</body>

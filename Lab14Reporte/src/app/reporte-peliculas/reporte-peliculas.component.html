@@ -1,0 +1,34 @@
+<table class="pelicula-table">
+    <tr>
+      <th>Título</th>
+      <th>Género</th>
+      <th>Año de lanzamiento</th>
+    </tr>
+    <tr *ngFor="let pelicula of peliculasFiltradas">
+      <td>{{ pelicula.titulo }}</td>
+      <td>{{ pelicula.genero }}</td>
+      <td>{{ pelicula.lanzamiento }}</td>
+    </tr>
+  </table>
+  
+  <div class="filter-section">
+    <label for="filtroGenero">Filtrar por género:</label>
+    <select id="filtroGenero" [(ngModel)]="filtroGenero" (change)="aplicarFiltro()">
+      <option value="">Todos</option>
+      <option *ngFor="let genero of generos" [value]="genero">{{ genero }}</option>
+    </select>
+  </div>
+  
+  <div class="filter-section">
+    <label for="filtroAnio">Filtrar por año de lanzamiento:</label>
+    <select id="filtroAnio" [(ngModel)]="filtroAnio" (change)="aplicarFiltro()">
+      <option value="0">Todos</option>
+      <option *ngFor="let anio of aniosLanzamiento" [value]="anio">{{ anio }}</option>
+    </select>
+  </div>
+  
+  <button class="pdf-button" (click)="generarPDF()">Generar PDF</button>
+  <button class="pdf-button" (click)="generarExcel()">Exportar a Excel</button>
+  <button class="pdf-button" (click)="generarCSV()">Exportar a CSV</button>
+  <button class="clear-button" (click)="limpiarFiltros()">Limpiar Filtros</button>
+  
